@@ -12,6 +12,14 @@ class Post extends Model {
     return 'posts';
   }
 
+  static get createdAtColumn() {
+    return false;
+  }
+
+  static get updatedAtColumn() {
+    return false;
+  }
+
   images() {
     return this.hasMany('App/Models/Image');
   }

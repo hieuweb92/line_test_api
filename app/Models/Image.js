@@ -23,6 +23,7 @@ class Image extends Model {
   post() {
     return this.belongsTo('App/Models/Post');
   }
+
 }
 
 module.exports = Image;

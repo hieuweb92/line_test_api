@@ -19,16 +19,17 @@ class PostController {
         post.images = await Image.query()
           .whereIn('id', images.map(image => (image.id)))
           .whereNull('post_id')
-          .update({ post_id: post.id })
-          .fetch();
+          .update({ post_id: post.id });
+        post.images = await post.images().fetch();
       }
       if (video) {
         post.video = await Video.query()
           .where('id', video.id)
           .whereNull('post_id')
-          .update({ post_id: post.id })
-          .fetch();
+          .update({ post_id: post.id });
+        post.video = await post.video().fetch();
       }
+
       return response.send({
         resultCode: Constants.resultCode.success,
         resultData: post,
@@ -126,15 +127,15 @@ class PostController {
         post.images = await Image.query()
           .whereIn('id', images.map(image => (image.id)))
           .whereNull('post_id')
-          .update({ post_id: post.id })
-          .fetch();
+          .update({ post_id: post.id });
+        post.images = await post.images().fetch();
       }
       if (video) {
         post.video = await Video.query()
           .where('id', video.id)
           .whereNull('post_id')
-          .update({ post_id: post.id })
-          .fetch();
+          .update({ post_id: post.id });
+        post.video = await post.video().fetch();
       }
       return response.send({
         resultCode: Constants.resultCode.success,

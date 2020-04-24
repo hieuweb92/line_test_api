@@ -12,10 +12,6 @@ class Link extends Model {
     return 'links';
   }
 
-  static get hidden() {
-    return ['post_id']
-  }
-
   post() {
     return this.belongsTo('App/Models/Post');
   }

@@ -12,10 +12,6 @@ class Video extends Model {
     return 'videos';
   }
 
-  static get hidden() {
-    return ['post_id']
-  }
-
   post() {
     return this.belongsTo('App/Models/Post');
   }

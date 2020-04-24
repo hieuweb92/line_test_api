@@ -78,11 +78,13 @@ class PostController {
     try {
       const { id } = request.all();
       const post = await Post.query()
+        .where('id', id)
         .with('images')
         .with('video')
         .with('link')
         .with('survey')
-        .firstOrFail(id);
+        .firstOrFail();
+      console.log(post);
       return response.send({
         resultCode: Constants.resultCode.success,
         resultData: post,

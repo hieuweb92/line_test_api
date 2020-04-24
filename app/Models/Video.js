@@ -16,6 +16,14 @@ class Video extends Model {
     return ['post_id']
   }
 
+  static get createdAtColumn() {
+    return false;
+  }
+
+  static get updatedAtColumn() {
+    return false;
+  }
+
   post() {
     return this.belongsTo('App/Models/Post');
   }

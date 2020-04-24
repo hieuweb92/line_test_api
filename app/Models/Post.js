@@ -13,11 +13,11 @@ class Post extends Model {
   }
 
   static get createdAtColumn() {
-    return null;
+    return false;
   }
 
   static get updatedAtColumn() {
-    return null;
+    return false;
   }
 
   images() {

@@ -27,7 +27,7 @@ class UploadController {
         image.original = relativePath + '/' + originalName;
         image.width = imageInfo.width;
         image.height = imageInfo.height;
-        image.save();
+        await image.save();
         return response.send({
           resultCode: Constants.resultCode.success,
           resultData: image,

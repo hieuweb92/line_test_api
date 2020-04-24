@@ -12,6 +12,10 @@ class Survey extends Model {
     return 'surveys';
   }
 
+  static get hidden() {
+    return ['post_id']
+  }
+
   post() {
     return this.belongsTo('App/Models/Post');
   }

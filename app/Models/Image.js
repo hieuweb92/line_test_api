@@ -12,6 +12,10 @@ class Image extends Model {
     return 'images';
   }
 
+  static get hidden() {
+    return ['post_id'];
+  }
+
   static get createdAtColumn() {
     return false;
   }

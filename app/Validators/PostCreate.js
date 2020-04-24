@@ -8,8 +8,7 @@ class PostCreate {
       type: 'required|regex:^[A-Z]+$',
       status: 'required|regex:^[A-Z]+$',
       scheduledTime: 'integer',
-      imagesId: 'array',
-      videoId: 'integer',
+      images: 'array',
       createdAt: 'integer'
     };
   }
@@ -21,8 +20,6 @@ class PostCreate {
       'status.required': 'Post status cannot be empty',
       'status.regex': 'Post status is invalid',
       'scheduledTime.integer': 'Scheduled Time must be an integer',
-      'imagesId.array': 'Images id must be an array',
-      'videoId.integer': 'Video id must be an integer',
       'createdAt.integer': 'Created at must be an integer'
     };
   }

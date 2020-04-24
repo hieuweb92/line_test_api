@@ -8,26 +8,23 @@ const Constants = use('App/Constants');
 class PostController {
   async create({ request, response }) {
     try {
-      const { imagesId, videoId } = request.all();
-      if (!imagesId.every(Number.isInteger)) {
-        throw 'Images id must be an array integer';
-      }
+      const { images, video } = request.all();
       const post = new Post();
       post.type = request.input('type');
       post.status = request.input('status');
       post.scheduled_time = request.input('scheduledTime');
       post.created_at = request.input('createdAt');
       await post.save();
-      if (imagesId.length) {
+      if (images.length) {
         post.images = await Image.query()
-          .whereIn('id', imagesId)
+          .whereIn('id', images.map(image => (image.id)))
           .whereNull('post_id')
           .update({ post_id: post.id })
           .fetch();
       }
-      if (videoId) {
+      if (video) {
         post.video = await Video.query()
-          .where('id', videoId)
+          .where('id', video.id)
           .whereNull('post_id')
           .update({ post_id: post.id })
           .fetch();
@@ -112,10 +109,7 @@ class PostController {
 
   async update({ request, response }) {
     try {
-      const { id, imagesId, videoId } = request.all();
-      if (!imagesId.every(Number.isInteger)) {
-        throw 'Images id must be an array integer';
-      }
+      const { id, images, video } = request.all();
       const post = await Post.findOrFail(id);
       post.type = request.input('type', post.type);
       post.status = request.input('status', post.status);
@@ -128,16 +122,16 @@ class PostController {
       await Video.query()
         .where('post_id', id)
         .update({ post_id: null });
-      if (imagesId.length) {
+      if (images.length) {
         post.images = await Image.query()
-          .whereIn('id', imagesId)
+          .whereIn('id', images.map(image => (image.id)))
           .whereNull('post_id')
           .update({ post_id: post.id })
           .fetch();
       }
-      if (videoId) {
+      if (video) {
         post.video = await Video.query()
-          .where('id', videoId)
+          .where('id', video.id)
           .whereNull('post_id')
           .update({ post_id: post.id })
           .fetch();
